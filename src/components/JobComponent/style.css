@@ -1,3 +1,7 @@
+.job-component {
+  margin: 20px 0;
+}
+
 .job-component__right {
   text-align: right;
 }

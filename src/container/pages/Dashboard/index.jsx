@@ -11,7 +11,8 @@ export default class Home extends Component {
 
   state = {
     jobs: [],
-    filteredJobs: []
+    filteredJobs: [],
+    isFiltered: false
   }
 
   componentDidMount() {
@@ -29,7 +30,7 @@ export default class Home extends Component {
   }
 
   render() {
-    const { filteredJobs } = this.state
+    const { filteredJobs, isFiltered } = this.state
 
     const getFilteredJobs = (filter) => {
       const filteredJobs = this.state.filteredJobs.filter(item => {
@@ -41,7 +42,8 @@ export default class Home extends Component {
       })
 
       this.setState({
-        filteredJobs
+        filteredJobs,
+        isFiltered: true
       })
     }
 
@@ -49,10 +51,26 @@ export default class Home extends Component {
       this.props.history.push(`detail/${data}`)
     }
 
+    const renderAuthButton = () => {
+      if (isFiltered) {
+        return (
+          <h4>Showing {filteredJobs.length} jobs</h4>
+        );
+      } else {
+        return (
+          <h4>Job List</h4>
+        );
+      }
+    }
+
     return (
       <div className="App">
         {/* filter */}
         <SearchBar getFilteredJobs={getFilteredJobs} />
+
+        <Container>
+          { renderAuthButton() }
+        </Container>
 
         {/* list jobs */}
         <Container>
