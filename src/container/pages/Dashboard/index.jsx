@@ -1,20 +1,13 @@
-import Navbar from './components/NavbarComponent'
-import Job from './components/JobComponent'
-import SearchBar from './components/SearchBarComponent'
+import Job from '../../../components/JobComponent'
+import SearchBar from '../../../components/SearchBarComponent'
 
 import React, { Component } from 'react'
-import {
-  Row,
-  Col,
-  Container,
-  Form,
-  Button
-} from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
-import { API_URL } from './utils/constants'
+import { API_URL } from '../../../utils/constants'
 import axios from 'axios'
 
-export default class App extends Component {
+export default class Home extends Component {
 
   state = {
     jobs: [],
@@ -22,7 +15,7 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    axios.get(API_URL)
+    axios.get(API_URL + 'positions.json')
       .then(res => {
         this.setState({
           jobs: res.data,
@@ -52,27 +45,26 @@ export default class App extends Component {
       })
     }
 
+    const handleJobDetail = (data) => {
+      this.props.history.push(`detail/${data}`)
+    }
+
     return (
       <div className="App">
-        {/* navbar */}
-        <Navbar />
-
         {/* filter */}
         <SearchBar getFilteredJobs={getFilteredJobs} />
 
         {/* list jobs */}
-        <Container fluid>
-          <Row>
-            <Col>
-              <Row>
-                { filteredJobs && filteredJobs.map((job) => {
-                  return (
-                    <Job data={job} key={job.id} />
-                  )
-                }) }
-              </Row>
-            </Col>
-          </Row>
+        <Container>
+          { filteredJobs && filteredJobs.map((job) => {
+            return (
+              <Job
+                data={job}
+                key={job.id}
+                jobDetail={(data) => handleJobDetail(data)}
+              />
+            )
+          }) }
         </Container>
       </div>
     )

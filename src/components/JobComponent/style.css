@@ -1,0 +1,25 @@
+.job-component__right {
+  text-align: right;
+}
+
+.title {
+  color: blue;
+  font-weight: 500;
+}
+
+.job-type {
+  color: green;
+}
+
+.company {
+  color: grey
+}
+
+.location {
+  font-weight: 500;
+  color: grey
+}
+
+.posted-at {
+  color: grey
+}
