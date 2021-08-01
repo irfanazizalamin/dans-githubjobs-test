@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import Login from '../pages/Login'
 import Dashboard from '../pages/Dashboard'
 import JobDetail from '../pages/JobDetail'
 import Navbar from '../../components/NavbarComponent'
@@ -17,6 +18,7 @@ class Home extends Component {
           {/* navbar */}
           <Navbar />
 
+          <Route path="/login" component={Login}></Route>
           <Route path="/" exact component={Dashboard}></Route>
           <Route path="/detail/:id" component={JobDetail}></Route>
         </Fragment>

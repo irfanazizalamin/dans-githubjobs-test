@@ -49,7 +49,6 @@ export default class JobDetailComponent extends Component {
           <Container fluid>
             <Row>
               <Col md={8}>
-                { job.description }
                 <div dangerouslySetInnerHTML={{__html: job.description}} />
               </Col>
 
